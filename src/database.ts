@@ -1,6 +1,7 @@
 import type {QueryDatabaseResponse} from '@notionhq/client/build/src/api-endpoints';
 import {ValueOf} from 'type-fest';
 import {ArrayElement} from './util-types/array-element';
+import {escape} from './utils';
 
 export type PropertyValues = ValueOf<
   ArrayElement<QueryDatabaseResponse['results']>['properties']
@@ -175,9 +176,10 @@ export const getRows =
       .map(({properties}) => properties)
       .map((row) =>
         Object.fromEntries(
-          Object.entries(row).map(([key, propertyValue]) => [
-            key,
-            properties(options)(propertyValue),
-          ]),
+          Object.entries(row).map(([key, propertyValue]) => {
+            const value = properties(options)(propertyValue);
+
+            return [key, value ? escape(value) : value];
+          }),
         ),
       );
