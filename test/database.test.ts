@@ -154,7 +154,7 @@ describe('Database.properties', () => {
       date: {start: '2021-11-10T06:26:00.000+09:00', end: null},
     };
 
-    expect(Database.date()(value)).toBe('11/10/2021, 6:26:00 AM');
+    expect(Database.date()(value)).toBe('2021-11-10 06:26:00');
   });
 
   // Unsupported
@@ -252,7 +252,7 @@ describe('Database.properties', () => {
       created_time: '2021-11-10T06:26:00.000Z',
     };
 
-    expect(Database.created_time()(value)).toBe('11/10/2021, 6:26:00 AM');
+    expect(Database.created_time()(value)).toBe('2021-11-10 15:26:00');
   });
 
   // Unsupported
@@ -270,6 +270,6 @@ describe('Database.properties', () => {
       last_edited_time: '2021-11-10T06:26:00.000Z',
     };
 
-    expect(Database.last_edited_time()(value)).toBe('11/10/2021, 6:26:00 AM');
+    expect(Database.last_edited_time()(value)).toBe('2021-11-10 15:26:00');
   });
 });

@@ -1,7 +1,7 @@
 import type {QueryDatabaseResponse} from '@notionhq/client/build/src/api-endpoints';
 import {ValueOf} from 'type-fest';
 import {ArrayElement} from './util-types/array-element';
-import {escape} from './utils';
+import {escape, formatDate} from './utils';
 
 export type PropertyValues = ValueOf<
   ArrayElement<QueryDatabaseResponse['results']>['properties']
@@ -38,11 +38,10 @@ export const SUPPORTED_PROPERTIES: PropertyType[] = [
 
 export type PropertyOptions = {
   date: {
-    locales?: string;
+    timeZone?: string;
+    format?: string;
   };
 };
-
-const ignoreTimezoneOffset = (string_: string) => string_.replace(/\+.*/, 'Z');
 
 export const title = (value: PropertyValue<'title'>) =>
   value.title.map(({plain_text}) => plain_text).join('');
@@ -61,14 +60,8 @@ export const date =
   (options?: PropertyOptions['date']) =>
   ({date}: PropertyValue<'date'>) =>
     date?.end
-      ? `${new Date(ignoreTimezoneOffset(date.start)).toLocaleString(
-          options?.locales ?? 'en-US',
-        )} ~ ${new Date(ignoreTimezoneOffset(date.end)).toLocaleString(
-          options?.locales ?? 'en-US',
-        )}`
-      : `${new Date(ignoreTimezoneOffset(date.start)).toLocaleString(
-          options?.locales ?? 'en-US',
-        )}`;
+      ? `${formatDate(date.start, options)} ~ ${formatDate(date.end, options)}`
+      : `${formatDate(date.start, options)}`;
 
 // Unsupported
 
@@ -100,7 +93,7 @@ export const phone_number = ({phone_number}: PropertyValue<'phone_number'>) =>
 export const created_time =
   (options?: PropertyOptions['date']) =>
   ({created_time}: PropertyValue<'created_time'>) =>
-    new Date(created_time).toLocaleString(options?.locales ?? 'en-US');
+    formatDate(created_time, options);
 
 // Unsupported
 
@@ -111,7 +104,7 @@ export const created_time =
 export const last_edited_time =
   (options?: PropertyOptions['date']) =>
   ({last_edited_time}: PropertyValue<'last_edited_time'>) =>
-    new Date(last_edited_time).toLocaleString(options?.locales ?? 'en-US');
+    formatDate(last_edited_time, options);
 
 export const properties =
   (options?: Partial<PropertyOptions>) => (value: PropertyValues) => {

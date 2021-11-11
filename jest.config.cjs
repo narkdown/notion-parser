@@ -4,7 +4,7 @@ process.env.TZ = 'UTC';
 
 /** @type {import("@jest/types").Config.InitialOptions } */
 module.exports = {
-  preset: 'ts-jest/presets/default-esm',
+  preset: 'ts-jest',
   testEnvironment: 'node',
   verbose: true,
   modulePathIgnorePatterns: ['<rootDir>/dist/'],

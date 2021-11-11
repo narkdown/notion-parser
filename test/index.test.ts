@@ -1,4 +1,4 @@
-import process from 'node:process';
+import process from 'process'; // eslint-disable-line unicorn/prefer-node-protocol
 import {Client as NotionClient} from '@notionhq/client';
 import NotionFaker from '@narkdown/notion-faker';
 import dotenv from 'dotenv';
