@@ -4,7 +4,7 @@ import NotionFaker from '@narkdown/notion-faker';
 import dotenv from 'dotenv';
 import {QueryDatabaseResponse} from '@notionhq/client/build/src/api-endpoints';
 import {arrayIncludes} from '../src/utils';
-import NotionParser from '../src/index';
+import {NotionParser} from '../src/index';
 import * as Database from '../src/database';
 
 dotenv.config();

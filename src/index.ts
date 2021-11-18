@@ -9,7 +9,7 @@ export interface INotionParser {
     getRows: Database.GetRows;
   };
 }
-export default class NotionParser {
+export class NotionParser {
   public database: INotionParser['database'];
 
   public constructor(options?: Partial<NotionParserOptions>) {
