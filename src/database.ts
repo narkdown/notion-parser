@@ -1,10 +1,9 @@
 import type {QueryDatabaseResponse} from '@notionhq/client/build/src/api-endpoints';
-import {ValueOf} from 'type-fest';
-import {ArrayElement} from './util-types/array-element';
+import type {ValueOf, IterableElement} from 'type-fest';
 import {escape, formatDate} from './utils';
 
 export type PropertyValues = ValueOf<
-  ArrayElement<QueryDatabaseResponse['results']>['properties']
+  IterableElement<QueryDatabaseResponse['results']>['properties']
 >;
 
 export type PropertyType = PropertyValues['type'];
