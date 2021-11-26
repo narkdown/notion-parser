@@ -16,7 +16,7 @@ const notion: NotionClient = new NotionClient({auth: NOTION_API_KEY});
 const notionFaker: NotionFaker = new NotionFaker();
 const notionParser: NotionParser = new NotionParser();
 
-const TIMEOUT = 60_000;
+const TIMEOUT = 2 * 60 * 1000;
 
 let response: QueryDatabaseResponse;
 let TEST_PAGE_ID: string;
