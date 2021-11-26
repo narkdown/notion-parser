@@ -1,6 +1,6 @@
 import type {QueryDatabaseResponse} from '@notionhq/client/build/src/api-endpoints';
 import type {ValueOf, IterableElement} from 'type-fest';
-import {escape, formatDate} from './utils';
+import {escape, formatDate, objectEntries} from './utils';
 
 export type PropertyValues = ValueOf<
   IterableElement<QueryDatabaseResponse['results']>['properties']
@@ -42,11 +42,55 @@ export type PropertyOptions = {
   };
 };
 
+export type Annotations = IterableElement<
+  PropertyValue<'title'>['title']
+>['annotations'];
+
+export const annotationParsers: Record<
+  keyof Annotations,
+  (string_: string) => string
+> = {
+  bold: (string_: string) => `**${string_}**`,
+  italic: (string_: string) => `_${string_}_`,
+  strikethrough: (string_: string) => `~~${string_}~~`,
+  underline: (string_: string) => `<u>${string_}</u>`,
+  code: (string_: string) => `\`${string_}\``,
+  color: (string_: string) => `${string_}`,
+};
+
+export const applyAnnotations = (text: string, annotations: Annotations) => {
+  let annotatedText = text;
+
+  const annotationKeys = objectEntries(annotations)
+    .filter(([, value]) => value)
+    .map(([key]) => key);
+
+  for (const key of annotationKeys) {
+    annotatedText = annotationParsers[key](annotatedText);
+  }
+
+  return annotatedText;
+};
+
+export const applyLink = (text: string, href: string) => `[${text}](${href})`;
+
 export const title = (value: PropertyValue<'title'>) =>
-  value.title.map(({plain_text}) => plain_text).join('');
+  value.title
+    .map(({plain_text, annotations, href}) =>
+      href
+        ? applyLink(applyAnnotations(plain_text, annotations), href)
+        : applyAnnotations(plain_text, annotations),
+    )
+    .join('');
 
 export const rich_text = (value: PropertyValue<'rich_text'>) =>
-  value.rich_text.map(({plain_text}) => plain_text).join('');
+  value.rich_text
+    .map(({plain_text, annotations, href}) =>
+      href
+        ? applyLink(applyAnnotations(plain_text, annotations), href)
+        : applyAnnotations(plain_text, annotations),
+    )
+    .join('');
 
 export const number = ({number}: PropertyValue<'number'>) => number;
 
