@@ -1356,14 +1356,14 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@narkdown/notion-faker@0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@narkdown/notion-faker/-/notion-faker-0.3.1.tgz#7f6ce41f751e08363cba0f381f272c0f662991ef"
-  integrity sha512-O1PWwRBfeRhqg0ZBg5nkjv0IeR7XDvmUwarzzCor85l+TM0DDdiLmQ1gsy64kjUykGkA7dcUcdwGdhQEsgc8YA==
+"@narkdown/notion-faker@0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@narkdown/notion-faker/-/notion-faker-0.5.1.tgz#99e6f6861dcb7793e9081215119d40ed790e8889"
+  integrity sha512-epNoUX3Up52B2pR0GmhxvB/oAPpZfXpgr3sulY+Al3cCf6JbEj6FDG1JNI2eEB3HfhrL1IlEcvePBb1tWdC+rA==
   dependencies:
     "@notionhq/client" "0.4.4"
     "@types/faker" "5.5.9"
-    "@younho9/types" "0.11.2"
+    "@younho9/types" "0.13.0"
     faker "5.5.3"
     lodash.get "4.4.2"
     type-fest "2.5.1"
@@ -1681,10 +1681,10 @@
   dependencies:
     "@types/prettier" "2.4.1"
 
-"@younho9/types@0.11.2":
-  version "0.11.2"
-  resolved "https://registry.yarnpkg.com/@younho9/types/-/types-0.11.2.tgz#d84708fee54fe7d4f733ed4afab046258564ed16"
-  integrity sha512-6GbB1B7S51a+OBWTKjQGTemBCgkQ0HDlGpoSvZRpCHYZAou/ByxBi7iiHbM8+G1N4eKiAt0K1MIBwcJ5qS8SCw==
+"@younho9/types@0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@younho9/types/-/types-0.13.0.tgz#8901fa377abdec891b97cf1d962e621de73adcc5"
+  integrity sha512-A1yDlaNxtGEtwiJXiyMeaX+gaC5hBdQTBk2vmRvIM+oJx80G/I0v6RwNsDsdFJAsJVm6eljp6gBGKc1QgZyvjQ==
   dependencies:
     tsd "0.18.0"
     type-fest "2.5.1"
