@@ -97,7 +97,7 @@ export const number = ({number}: PropertyValue<'number'>) => number;
 export const select = ({select}: PropertyValue<'select'>) => select?.name ?? '';
 
 export const multi_select = ({multi_select}: PropertyValue<'multi_select'>) =>
-  multi_select.at(0)?.name ?? '';
+  multi_select[0]?.name ?? '';
 
 export const date =
   (options?: PropertyOptions['date']) =>
