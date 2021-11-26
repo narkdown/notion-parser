@@ -14,6 +14,9 @@ jobs:
       - name: Generate coverage report
         run: |
           yarn install && yarn codecov
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          ENTRY_POINT_PAGE_ID: ${{ secrets.ENTRY_POINT_PAGE_ID }}
 
       - uses: codecov/codecov-action@v2
         with:
