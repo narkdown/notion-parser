@@ -1,0 +1,20 @@
+name: codecov
+
+on: [push]
+
+jobs:
+  codecov:
+    name: codecov
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+
+      - name: Generate coverage report
+        run: |
+          yarn install && yarn codecov
+
+      - uses: codecov/codecov-action@v2
+        with:
+          verbose: true
